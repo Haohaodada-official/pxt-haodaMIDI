@@ -541,11 +541,11 @@ namespace haodaMIDI {
 
 
     function midi_send(a: number, b: number, c: number): void {
-		__disable_irq()
+		
         midi_write(a);
         midi_write(b);
         midi_write(c);
-		__enable_irq()
+		
     }
 
 
