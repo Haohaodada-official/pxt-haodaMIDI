@@ -541,9 +541,11 @@ namespace haodaMIDI {
 
 
     function midi_send(a: number, b: number, c: number): void {
+		__disable_irq()
         midi_write(a);
         midi_write(b);
         midi_write(c);
+		__enable_irq()
     }
 
 
@@ -555,6 +557,10 @@ namespace haodaMIDI {
         midi_send(index, pply, pply);
     }
 
+    /**
+	 * show a digital in given position
+     * @param pply is position, eg: 127
+     */
     //% weight=40
     //% blockId=HaodaMidi_sendtt block="midi at pin %port send channel %index scale %sca note %noty volume %pply"
 	//% inlineInputMode=inline
@@ -565,6 +571,10 @@ namespace haodaMIDI {
         midi_send(index, value, pply);
     }
 
+    /**
+	 * show a digital in given position
+     * @param pcl is position, eg: 127
+     */
     //% weight=40
     //% blockId=HaodaMidi_play block="midi at pin|%port|send percussion|%index|volume|%pcl"
     export function sendpercussion(port: Ports, index: soundd, pcl: number): void {
