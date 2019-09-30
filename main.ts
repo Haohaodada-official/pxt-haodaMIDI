@@ -532,7 +532,7 @@ namespace haodaMIDI {
             } else {
                 pins.digitalWritePin(pinn, 0);
             }
-            control.waitMicros(0);
+            
         }
         pins.digitalWritePin(pinn, 1);
 
@@ -559,11 +559,12 @@ namespace haodaMIDI {
 
     /**
 	 * show a digital in given position
-     * @param pply is position, eg: 127
+     * @param pply is position, eg: 50
      */
     //% weight=40
     //% blockId=HaodaMidi_sendtt block="midi at pin %port send channel %index scale %sca note %noty volume %pply"
 	//% inlineInputMode=inline
+	//% pply.max=0 pply.min=127
     export function sendtone(port: Ports, index: riverss1, scale: musicscale, note: musicnote, pply: number): void {
         let pin = PortDigital[port];
         midi_setpin(pin);
@@ -573,10 +574,11 @@ namespace haodaMIDI {
 
     /**
 	 * show a digital in given position
-     * @param pcl is position, eg: 127
+     * @param pcl is position, eg: 50
      */
     //% weight=40
     //% blockId=HaodaMidi_play block="midi at pin|%port|send percussion|%index|volume|%pcl"
+	//% pcl.max=0 pcl.min=127
     export function sendpercussion(port: Ports, index: soundd, pcl: number): void {
         let pin = PortDigital[port];
         midi_setpin(pin);
