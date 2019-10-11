@@ -611,8 +611,8 @@ namespace haodaMIDI {
      * @param pcl is position, eg: 50
      */
     //% weight=40
-    //% blockId=HaodaMidi_play block="midi at pin|%port|send percussion|%index|volume|%pcl"
-    export function sendpercussion(port: Ports, index: soundd, pcl: number): void {
+    //% blockId=HaodaMidi_play block="midi send percussion|%index|volume|%pcl"
+    export function sendpercussion(index: soundd, pcl: number): void {
         let buf = pins.createBuffer(3);
         buf[0] = 0x99;
         buf[1] = index;
