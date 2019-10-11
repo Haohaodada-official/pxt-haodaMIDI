@@ -562,20 +562,21 @@ namespace haodaMIDI {
     //% weight=40
     //% blockId=HaodaMidi_setup block="midi setup at pin|%port"
     export function setup(port: Ports): void {
+        /** 
         if(port = 1){
             serial.redirect(
                 SerialPin.P1,
                 SerialPin.P0,
                 BaudRate.BaudRate31250
             ) 
-        }else{
+        }else{*/
             serial.redirect(
                 PortSerial[port],
                 SerialPin.P1,
                 BaudRate.BaudRate31250
             )
 
-        }
+        
         
     }
 
