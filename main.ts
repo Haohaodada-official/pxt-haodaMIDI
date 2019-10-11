@@ -14,6 +14,15 @@ namespace haodaMIDI {
 
     ]
 
+    const PortSerial = [
+        SerialPin.P0,
+        SerialPin.P1,
+        SerialPin.P2,
+        SerialPin.P8,
+        SerialPin.P12,
+        SerialPin.P16,
+    ]
+
     export enum Ports {
         P0 = 0,
         P1 = 1,
@@ -550,14 +559,34 @@ namespace haodaMIDI {
         midi_write(c);
 		
     }
+    //% weight=40
+    //% blockId=HaodaMidi_setup block="midi setup at pin|%port"
+    export function setup(port: Ports): void {
+        if(port = 1){
+            serial.redirect(
+                SerialPin.P1,
+                SerialPin.P0,
+                BaudRate.BaudRate31250
+            ) 
+        }else{
+            serial.redirect(
+                PortSerial[port],
+                SerialPin.P1,
+                BaudRate.BaudRate31250
+            )
 
+        }
+        
+    }
 
     //% weight=40
-    //% blockId=HaodaMidi_set block="midi at pin|%port|set channel|%index|tone|%pply"
-    export function settone(port: Ports, index: riverss, pply: musicplay): void {
-        let pin = PortDigital[port];
-        midi_setpin(pin);
-        midi_send(index, pply, pply);
+    //% blockId=HaodaMidi_set block="midi set channel|%index|tone|%pply"
+    export function settone(index: riverss, pply: musicplay): void {
+        let buf = pins.createBuffer(3);
+        buf[0] = index;
+        buf[1] = pply;
+        buf[2] = pply;
+        serial.writeBuffer(buf)
     }
 
     /**
@@ -565,13 +594,15 @@ namespace haodaMIDI {
      * @param pply is position, eg: 50
      */
     //% weight=40
-    //% blockId=HaodaMidi_sendtt block="midi at pin %port send channel %index scale %sca note %noty volume %pply"
+    //% blockId=HaodaMidi_sendtt block="midi send channel %index scale %sca note %noty volume %pply"
 	//% inlineInputMode=inline
-    export function sendtone(port: Ports, index: riverss1, scale: musicscale, note: musicnote, pply: number): void {
-        let pin = PortDigital[port];
-        midi_setpin(pin);
+    export function sendtone(index: riverss1, scale: musicscale, note: musicnote, pply: number): void {
         let value = scale + note;
-        midi_send(index, value, pply);
+        let buf = pins.createBuffer(3);
+        buf[0] = index;
+        buf[1] = value;
+        buf[2] = pply;
+        serial.writeBuffer(buf)
     }
 
     /**
@@ -581,9 +612,11 @@ namespace haodaMIDI {
     //% weight=40
     //% blockId=HaodaMidi_play block="midi at pin|%port|send percussion|%index|volume|%pcl"
     export function sendpercussion(port: Ports, index: soundd, pcl: number): void {
-        let pin = PortDigital[port];
-        midi_setpin(pin);
-        midi_send(0x99, index, pcl);
+        let buf = pins.createBuffer(3);
+        buf[0] = 0x99;
+        buf[1] = index;
+        buf[2] = pcl;
+        serial.writeBuffer(buf)
     }
     /**
         //% weight=20
