@@ -53,8 +53,6 @@ namespace haodaMIDI {
         s7 = 0xc7,
         //% block=8
         s8 = 0xc8,
-        //% block=9
-        s9 = 0xc9,
         //% block=10
         s10 = 0xca,
         //% block=11
@@ -90,8 +88,6 @@ namespace haodaMIDI {
         a7 = 0x97,
         //% block=8
         a8 = 0x98,
-        //% block=9
-        a9 = 0x99,
         //% block=10
         a10 = 0x9a,
         //% block=11
