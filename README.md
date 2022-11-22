@@ -1,2 +1,4 @@
 # pxt-haodaMIDI
-for haodaMIDI
+haodaMIDI音乐模块
+
+![icon](icon.png)

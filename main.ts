@@ -557,22 +557,12 @@ namespace haodaMIDI {
     //% weight=40
     //% blockId=HaodaMidi_setup block="midi setup at pin|%port"
     export function setup(port: Ports): void {
-        
-        if(port != 1){
-            serial.redirect(
-                PortSerial[port],
-                SerialPin.P1,
-                BaudRate.BaudRate31250
-            ) 
-        }else {
+
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P0,
+            PortSerial[port],
+            SerialPin.P13,
             BaudRate.BaudRate31250
         )
-        }
-
-
 
     }
 
@@ -621,20 +611,20 @@ namespace haodaMIDI {
         export function ttest2(port: Ports): void {
             let pin = PortDigital[port];
             midi_setpin(pin);
-    
+
         }
-    
+
         //% weight=20
         //% blockId=HaodaMidi_test1 block="演奏"
         export function ttest1(): void {
-    
+
             midi_send(0x99, 0x23, 0x32);
         }
-    
+
         //% weight=20
         //% blockId=HaodaMidi_test3 block="停止"
         export function ttest3(): void {
-    
+
             midi_send(0x99, 0x23, 0x00);
         }
     */

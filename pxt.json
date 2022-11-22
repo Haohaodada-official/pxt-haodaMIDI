@@ -1,7 +1,7 @@
 {
     "name": "haodaMIDI",
-    "version": "0.0.1",
-    "description": "Extension for haodaMIDI",
+    "version": "0.0.2",
+    "description": "haodaMIDI音乐模块",
     "license": "MIT",
     "dependencies": {
         "core": "*"
